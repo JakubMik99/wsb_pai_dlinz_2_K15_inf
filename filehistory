@@ -1,0 +1,14 @@
+    1  git clone git@github.com:JakubMik99/wsb_pai_dlinz_2_K15_inf.git
+    2  ls
+    3  cd wsb_pai_dlinz_2_K15_inf
+    4  cd ^
+    5  cls
+    6  ls
+    7  clear
+    8  git clone https://github.com/JakubMik99/wsb_pai_dlinz_2_K15_inf.git
+    9  ls
+   10  cd wsb_pai_dlinz_2_K15_inf
+   11  ls
+   12  clear
+   13  history
+   14  history > filehistory
