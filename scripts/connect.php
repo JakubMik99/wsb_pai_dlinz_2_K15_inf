@@ -1,2 +1,4 @@
 <?php
-$conn = new mysqli("localhost","root","","wsb1");
+$conn = new mysqli("localhost","root","","wsb");
+// echo "db";
+echo $conn->connect_errno;
