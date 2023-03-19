@@ -13,8 +13,5 @@
     <input type="text" name="country" placeholder="kraj"> <br>
     <button type="submit" name="submit">Dodaj</button>
 </form>    
-    <?php
-
-    ?>
 </body>
 </html>
