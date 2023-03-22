@@ -26,6 +26,7 @@
             <th>Województwo</th>
             <th>Państwo</th>
             <th>Data urodzenia</th>
+            <th>Usuń użytkownika</th>
         </tr>
     USERSTABLE;
     while($user=$result->fetch_assoc()){
