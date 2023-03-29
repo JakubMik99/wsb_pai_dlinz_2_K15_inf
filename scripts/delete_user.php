@@ -10,7 +10,7 @@ $deleteUser = $_GET["deleteUserId"];
 echo "Nie usunięto rekordu";
 $deleteUser = 0;
 }
-header("location: ../4_db/4_db.php?deleteUser=$deleteUser")
+header("location: ../4_db/5_db.php?deleteUser=$deleteUser")
 ?>
 <script>
 //    history.back();

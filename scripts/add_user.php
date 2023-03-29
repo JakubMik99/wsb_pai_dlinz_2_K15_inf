@@ -19,4 +19,4 @@ if ($conn->affected_rows==1) {
     $_SESSION["error"] = "Nie dodano rekordu";
 
 }
-header("location: ../4_db/4_db.php");
+header("location: ../4_db/5_db.php");

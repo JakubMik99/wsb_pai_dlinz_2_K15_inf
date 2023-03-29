@@ -90,7 +90,14 @@
         </form>
         ADDUSERFORM;
     }else{
-    echo '<a href="./4_db.php?addUserForm=1">Dodaj użytkownika</a>';
+    echo '<a href="./5_db.php?addUserForm=1">Dodaj użytkownika</a>';
+    }
+
+    if(isset($_GET["updateUserId"])){
+echo <<< UPDATEUSERFORM
+<h4> Aktualizacja użytkownika </h4>
+UPDATEUSERFORM;
+
     }
     ?>
 
