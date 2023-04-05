@@ -68,6 +68,7 @@
             echo "<hr>Nie usunięto użytkownika";
         }
     }
+    // dodawanie użytkownika
     if(isset($_GET["addUserForm"])){
         echo <<< ADDUSERFORM
         <h4> Dodawanie użytkownika </h4>
@@ -86,19 +87,47 @@
         }
         echo <<< ADDUSERFORM
         </select> <br> <br>
+        <input type="checkbox" name="term" checked>Regulamin<br><br>
         <input type="submit" value="Dodaj użytkownika">
         </form>
         ADDUSERFORM;
     }else{
     echo '<a href="./5_db.php?addUserForm=1">Dodaj użytkownika</a>';
     }
-
+    //aktualizacja użytkownika
     if(isset($_GET["updateUserId"])){
-echo <<< UPDATEUSERFORM
-<h4> Aktualizacja użytkownika </h4>
-UPDATEUSERFORM;
-
+        $sql = "SELECT * FROM users WHERE id = $_GET[updateUserId]";
+        $_SESSION["updateUserId"] = $_GET["updateUserId"];
+        $result =$conn->query($sql);
+        $updateUser = $result->fetch_assoc();
+        echo <<< EDITUSERFORM
+        <h4> Edytowanie użytkownika </h4>
+        <form action="../scripts/update_user.php" method="post">
+        <input type="text" name="firstName" placeholder="Imię" value= "$updateUser[firstName]"> <br><br>
+        <input type="text" name="lastName" placeholder="Nazwsiko" value= "$updateUser[lastName]"> <br><br>
+        <input type="date" name="bitthday" placeholder ="Data urodzenia" value= "$updateUser[bitthday]"> <br><br>
+        <select name="city_id" >
+        EDITUSERFORM;
+        $sql = "SELECT * from cities";
+        $result = $conn->query($sql);
+        while($city=$result->fetch_assoc()){
+            if ($updateUser["city_id"]==$city["id"]) {
+                echo <<< MIASTO
+                <option selected value="$city[id]"> $city[city]</option>
+                MIASTO;
+            }else{
+                echo <<< MIASTO
+                <option value="$city[id]"> $city[city]</option>
+                MIASTO;
+            }
+        }
+        echo <<< EDITUSERFORM
+        </select> <br> <br>
+        <input type="submit" value="Aktualizuj użytkownika">
+        </form>
+        EDITUSERFORM;
     }
+    $conn->close();
     ?>
 
 </body>

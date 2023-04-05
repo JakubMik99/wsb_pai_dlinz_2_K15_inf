@@ -1,7 +1,6 @@
 <?php
 session_start();
 print_r($_POST);
-$error=0;
 foreach($_POST as $key => $value){
     //echo "$key: $value<br>";
     if (empty($value)) {
@@ -10,20 +9,11 @@ foreach($_POST as $key => $value){
         exit();
     }
 }
-if(!isset($_POST["term"]))
-{
-    $_SESSION["error"] = "Zatwierdź regulamin";
-    $error++;
-
-}
-if ($error !=0) {
-    $_SESSION["error"] = "Wprowadź wszystkie dane";
-    echo "<script>history.back();</script>";
-    exit();
-}
 require_once "./connect.php";
-$sql = "INSERT INTO users (id, city_id, firstName, lastName, bitthday) VALUES (NULL, '$_POST[city_id]', '$_POST[firstName]', '$_POST[lastName]', '$_POST[bitthday]');";
+//$sql = "INSERT INTO users (id, city_id, firstName, lastName, bitthday) VALUES (NULL, '$_POST[city_id]', '$_POST[firstName]', '$_POST[lastName]', '$_POST[bitthday]');";
+$sql = "UPDATE users SET city_id = $_POST[city_id], firstName = '$_POST[firstName]', lastName = '$_POST[lastName]', bitthday = '$_POST[bitthday]' WHERE users.id =$_SESSION[updateUserId]";
 $conn->query($sql);
+unset($_SESSION["updateUserId"]);
 // echo $conn->affected_rows;
 if ($conn->affected_rows==1) {
     $_SESSION["error"] = "Prawidłowo dodano rekord";
@@ -31,4 +21,4 @@ if ($conn->affected_rows==1) {
     $_SESSION["error"] = "Nie dodano rekordu";
 
 }
-//header("location: ../4_db/5_db.php");
+//  header("location: ../4_db/5_db.php");
