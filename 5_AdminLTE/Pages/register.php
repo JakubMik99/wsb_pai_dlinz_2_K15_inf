@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,20 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
+      <?php
+      echo '<div class="small-box bg-danger">';
+      if(isset($_SESSION["error"])){
+        echo $_SESSION["error"];
+        unset($_SESSION["error"]);
+      }
+      echo '</div>';
+      echo '<div class="small-box bg-success">';
+      if(isset($_SESSION["success"])){
+        echo $_SESSION["success"];
+        unset($_SESSION["success"]);
+      }
+      echo '</div>';
+      ?>
       <a href="../../index2.html" class="h1"><b>Moja</b>STRONKA</a>
     </div>
     <div class="card-body">
@@ -60,7 +75,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="passowrd1" placeholder="Podaj hasło">
+          <input type="password" class="form-control" name="password1" placeholder="Podaj hasło">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -83,11 +98,26 @@
             </div>
           </div>
         </div>
+
+
+
         <div class="input-group mb-3">
-          <input type="number" class="form-control" name="city_id" placeholder="Podaj id miasta">
+          <select class="form-control" name="city_id">
+          <?php
+          require_once "./scripts/connect.php";
+          $sql = "SELECT * FROM cities";
+          $result = $conn->query($sql);
+          while($city=$result->fetch_assoc()){
+            echo <<< CITY
+           <option value="$city[id]"> $city[city]</option>
+           CITY;
+        }
+          ?>
+          </select>
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-city"></span>
+            <span class="fas fa-solid fa-map-location-dot"></span>
+            <!-- <span class="fasr fa-sharp fa-regular fa-map-location-dot"></span> -->
             </div>
           </div>
         </div>
