@@ -33,7 +33,7 @@
       }
       echo '</div>';
       ?>
-      <a href="../../index2.html" class="h1"><b>Moja</b>STRONKA</a>
+      <a href="./index.php" class="h1"><b>Moja</b>STRONKA</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Rejestracja użytkownika</p>
@@ -121,6 +121,20 @@
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+        <div class="form-check">
+        <input class="form-check-input" type="radio" value="m" name="plec" checked>
+        <label class="form-check-label" >Mężczyzna</label>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <div class="form-check">
+        <input class="form-check-input" type="radio" value="w" name="plec">
+        <label class="form-check-label">Kobieta</label>
+        </div>
+      </div>
+
+          
 
         <div class="row">
           <div class="col-7">
