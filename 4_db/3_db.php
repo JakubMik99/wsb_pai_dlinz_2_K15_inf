@@ -21,7 +21,6 @@
    
    if($_GET["Miasto"]!=1)
    {
-
        $sql = "SELECT `users`.`id`,`users`.`firstName`,`users`.`lastName`, `users`.`bitthday`,`cities`.`city`,`states`.`state`,`countries`.`country` FROM `users` 
     inner join `cities` on `users`.`city_id` = `cities`.`id` 
     inner join `states` on `cities`.`state_id` = `states`.`id` 

@@ -33,6 +33,12 @@ foreach($_POST as $key => $value)
         echo "<script>history.back();</script>";
         exit(); 
     }
+    //walidacja hasła
+    if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d\s])\S{8,}$/',$_POST["password1"])){
+        $_SESSION["error"]="Hasło nie spełnia wymagań";
+        echo "<script>history.back();</script>";
+        exit();
+    }
   $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
   $stmt -> bind_param("s",$_POST["email1"]);
   $stmt ->execute();
