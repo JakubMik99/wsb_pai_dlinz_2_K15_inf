@@ -74,6 +74,24 @@
             </div>
           </div>
         </div>
+
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="additionalEmail1" placeholder="Podaj dodatkowy email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="additionalEmail2" placeholder="Powtórz dodatkowy email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" name="password1" placeholder="Podaj hasło">
           <div class="input-group-append">
