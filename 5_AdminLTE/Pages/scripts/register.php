@@ -7,7 +7,7 @@ function sanitizeInput(&$input){
 // echo $_POST["firstName"]." ilość znaków: ".strlen($_POST["firstName"])." ==> ". sanitizeInput($_POST["firstName"])." Ilość znaków: ".strlen($_POST["firstName"]));
 
 
-if ($_SERVER["REQUEST_METHOD"]== "POST") {
+if ($_SERVER["REQUEST_METHOD"]=="POST") {
     session_start();
 require_once "./connect.php";
 // echo "<pre>";
@@ -78,21 +78,24 @@ $required_fields = ["firstName","lastName","email1","email2","password1","passwo
             $gender = "man";
             $avatar = "../../img/man.png";
         }
-        foreach($_POST as $key => $value){
-            if(!$_POST["password1"] && !$_POST["password2"]){
-                sanitizeInput($_POST["key"]);
-            }
-        }
+        //sanityzacja danych dokończyć
+        // foreach($_POST as $key => $value){
+        //     if(!$_POST["password1"] && !$_POST["password2"]){
+        //         sanitizeInput($_POST["key"]);
+        //     }
+        // }
       $stmt= $conn->prepare("INSERT INTO `users` (`city_id`, `firstName`, `lastName`, `bitthday`,`gender`,`avatar`, `haslo`,`email`,`additional_email`, `created_at`) VALUES (?, ?, ?,?, ?, ?, ?, ?,?, current_timestamp());");
-      $pass = password_hash('$_POST["password1"]', PASSWORD_ARGON2ID);
+      $pass = password_hash($_POST["password1"], PASSWORD_ARGON2ID);
       $stmt ->bind_param('issssssss',$_POST["city_id"],$_POST["firstName"],$_POST["lastName"],$_POST["bitthday"],$gender,$avatar,$pass ,$_POST["email1"],$_POST["additionalEmail1"]);
       $stmt->execute();
     
       if($stmt->affected_rows==1){
           $_SESSION["success"] = "Dodano użytkownika $_POST[firstName] $_POST[lastName]";
+          header("location:../index.php");
+          exit();
         }else{
             $_SESSION["error"] = "Nie udało się dodać użytkownika";
         }
+        header("location:../register.php");  
     }
-    header("location:../register.php");  
     

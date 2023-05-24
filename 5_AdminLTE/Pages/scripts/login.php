@@ -1,21 +1,9 @@
 <?php
 session_start();
-//moja wersja
-// $err = array(
-//     "email" => "Wprowadź email <br>",
-//     "pass" => "Wprowadź hasło <br"
-// );
 //wersja z zajęć
 $errors = [];
 if($_SERVER["REQUEST_METHOD"]=='POST'){
-    
-    //moja wersja
-    // $_SESSION["error"]="";
-    // foreach($_POST as $key => $value){
-    //     if(empty($value)){
-    //         $_SESSION["error"] .= $err[$key];
-    //     }
-    // }
+
 // wersja z zajęć
     foreach($_POST as $key => $value){
         if(empty($value)){
@@ -27,10 +15,6 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
         header("location: ../index.php?error=".urlencode($error_messege));
         exit();
     }
-    //Zachowuje<b>
-    // echo htmlentities($_POST["email"]);
-    //Zachowuje tylko b
-    // filter_var($_POST["email"],FILTER_VALIDATE_EMAIL);
     if(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)== false)
     {
         $error_messege = "Wprowadź poprawny email";
@@ -40,6 +24,36 @@ if($_SERVER["REQUEST_METHOD"]=='POST'){
     else {
         echo "email:".$_POST["email"]. " hasło: ". $_POST["pass"];
     }
+    require_once "./connect.php";
+    $stmt = $conn->prepare("SELECT * FROM users where email=?");
+    $stmt->bind_param("s", $_POST["email"]);
+    $stmt-> execute();
+    $result = $stmt->get_result();
+    echo $result ->num_rows;
+    if($result->num_rows !=0){
+        $user = $result->fetch_assoc();
+        if(password_verify($_POST["pass"],$user["haslo"])){
+           $_SESSION["logged"]["firstName"] = $user["firstName"];
+           $_SESSION["logged"]["lastName"] = $user["lastName"];
+           $_SESSION["logged"]["role_id"] = $user["role_id"];
+           $_SESSION["logged"]["session_id"] = session_id();
+           header("location: ../logged.php");
+           print_r($_SESSION["logged"]);
+        print_r($_SESSION["logged"]);
+            echo "zalogowany";
+        }else{
+            $_SESSION["error"] = "Błędny login lub hasło!";
+        echo "<script> history.back();</script>";
+        exit();
+
+        }
+    }else{   
+        $_SESSION["error"] = "Błędny login lub hasło!";
+        echo "<script> history.back();</script>";
+        exit();
+    }
+
+
 } else{
     header("location:../pages/index.php");
 }

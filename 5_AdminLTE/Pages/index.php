@@ -1,4 +1,9 @@
-<?php  session_start();?>
+<?php  session_start();
+if(isset($_SESSION["logged"]) && session_status()==2){
+  header("location: ./logged.php");
+}
+  
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,14 +25,29 @@
 <div class="login-box">
   <!-- /.login-logo -->
 <?php
-if (isset($_GET["error"])) {
+if (isset($_GET["error"])|| isset($_SESSION["error"])) {
   echo <<< ERROR
   <div class="callout callout-danger">
   <h5>Błąd!</h5>
-  <p> $_GET[error].</p>
+  ERROR;
+  if(isset($_GET["error"])){
+  echo $_GET["error"];
+  }else if(isset($_SESSION["error"])){
+    echo $_SESSION["error"];
+    unset($_SESSION["error"]);
+  }
+  echo <<< ERROR
   </div>
   ERROR;
-  # code...
+}
+if (isset($_SESSION["success"])) {
+  echo <<< SUCCESS
+  <div class="callout callout-success">
+  <h5>Gratulacje!</h5>
+  <p> $_SESSION[success].</p>
+  </div>
+  SUCCESS;
+unset($_SESSION["success"]);
 }
   
 ?>
