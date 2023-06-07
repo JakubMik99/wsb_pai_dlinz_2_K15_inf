@@ -73,10 +73,10 @@ $required_fields = ["firstName","lastName","email1","email2","password1","passwo
         }
         if ($_POST["plec"]=="w") {
             $gender = "woman";
-            $avatar = "../../img/woman.png";
+            $avatar = "../img/woman.png";
         } else {
             $gender = "man";
-            $avatar = "../../img/man.png";
+            $avatar = "../img/man.png";
         }
         //sanityzacja danych dokończyć
         // foreach($_POST as $key => $value){
